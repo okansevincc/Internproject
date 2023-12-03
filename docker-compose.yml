@@ -1,0 +1,21 @@
+version: "3.4"
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - myData:/data/db
+  java-server:
+    container_name: canteenApp
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+volumes:
+  myData:
